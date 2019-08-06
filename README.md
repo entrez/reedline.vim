@@ -6,8 +6,8 @@ some little bash/readline style cmdline shortcuts for vim.
 
 ### mappings
 
-| key | description |
-| :---: | :---: |
+| shortcut | description |
+| :---: | :--- |
 | <kbd>ctrl</kbd>-<kbd>a</kbd> | jump to start of line |
 | <kbd>ctrl</kbd>-<kbd>e</kbd> | jump to end of line |
 | <kbd>ctrl</kbd>-<kbd>k</kbd> | delete everything from cursor to end of line |
