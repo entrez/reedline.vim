@@ -1,43 +1,44 @@
-" CTRL-a jumps to start of line
+" C-a jumps to start of line
 cno <c-a> <c-\>e<sid>reedline(-1, -1, 0, 0)<cr>
-" CTRL-e jumps to end of line
+" C-e jumps to end of line
 cno <c-e> <c-\>e<sid>reedline(1, -1, 0, 0)<cr>
-" CTRL-k deletes everything from cursor to end of line
+" C-k deletes everything from cursor to end of line
 cno <c-k> <c-\>e<sid>reedline(1, -1, 1, 0)<cr>
-" CTRL-p and CTRL-n cycle up & down through cmd history
+" C-p and C-n cycle up & down through cmd history
 cno <c-p> <up>
 cno <c-n> <down>
-" CTRL-b moves 1 char left, ALT-b moves 1 word left
+" C-b moves 1 char left, M-b moves 1 word left
 cno <c-b> <left>
 cno <m-b> <c-\>e<sid>reedline(-1, 0, 0, 0)<cr>
-" CTRL-f moves 1 char right, ALT-f moves 1 word right
+" C-f moves 1 char right, M-f moves 1 word right
 cno <c-f> <right>
 cno <m-f> <c-\>e<sid>reedline(1, 0, 0, 0)<cr>
-" ALT-d and ALT-D delete from cursor to end of word
+" M-d and M-D delete from cursor to end of word
 cno <m-s-d> <c-\>e<sid>reedline(1, 0, 1, 0)<cr>
 cno <m-d> <c-\>e<sid>reedline(1, 0, 1, 0)<cr>
-" ALT-<BS> deletes word until reaching punctuaction character
+" M-<BS> deletes word until reaching punctuaction character
 cno <m-bs> <c-\>e<sid>reedline(-1, 0, 1, 0)<cr>
-" CTRL-w deletes space-delimited word
+" C-w deletes space-delimited word if g:space_delimited_C_w == 1 
+" otherwise, acts like ALT-<BS>
 cno <c-w> <c-\>e<sid>reedline(-1, 1, 1, 0)<cr>
-" CTRL-u deletes to start of line
+" C-u deletes to start of line
 cno <c-u> <c-\>e<sid>reedline(-1, -1, 1, 0)<cr>
-" CTRL-d deletes character to the right
+" C-d deletes character to the right
 cno <c-d> <delete>
-" ALT-= and ALT-? activate command completion
+" M-= and M-? activate command completion
 cno <m-=> <c-i>
 cno <m-?> <c-i>
-" ALT-l makes next word lowercase
+" M-l makes next word lowercase
 cno <m-l> <c-\>e<sid>reedline(1, 0, 0, -1)<cr>
-" ALT-u makes next word UPPERCASE
+" M-u makes next word UPPERCASE
 cno <m-u> <c-\>e<sid>reedline(1, 0, 0, 1)<cr>
-" ALT-c makes next word Capitalized
+" M-c makes next word Capitalized
 cno <m-c> <c-\>e<sid>reedline(1, 1, 0, 1)<cr>
-" CTRL-y `yanks' (puts/pastes) last deleted word
+" C-y `yanks' (puts/pastes) last deleted word
 cno <c-y> <c-\>e<sid>reedline(1, 0, 0, 2)<cr>
-" CTRL-t transposes characters
+" C-t transposes characters
 cno <c-t> <c-\>e<sid>reedline(1, 1, 0, 3)<cr>
-" ALT-t transposes words
+" M-t transposes words
 cno <m-t> <c-\>e<sid>reedline(1, 0, 0, 3)<cr>
 
 if exists('*s:reedline')
@@ -59,8 +60,9 @@ func! s:reedline(direction, special, delete, mode)
         let second_half = cmd[pos:]
     endif
     if a:direction < 0
-        let first_half_edited = !a:special?substitute(first_half, '\v[0-9A-Za-z]*[^0-9A-Za-z]*$', '', '')
-                    \ :a:special<0?'':substitute(first_half, '\v\S*\s*$', '', '')
+        let first_half_edited = a:special>0 && exists("g:space_delimited_C_w") && g:space_delimited_C_w 
+                    \ ?substitute(first_half, '\v\S*\s*$', '', ''):a:special<0?''
+                    \ :substitute(first_half, '\v[0-9A-Za-z]*[^0-9A-Za-z]*$', '', '')
         let lendiff = len(first_half) - len(first_half_edited)
         let yanker = first_half[-lendiff:]
         let cmd_edited = a:delete?first_half_edited . second_half:cmd
