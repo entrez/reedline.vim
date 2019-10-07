@@ -14,7 +14,21 @@ USAGE                                                          *reedline-usage*
 after installing the plugin with your preferred plugin manager (or manually),
 little to no additional configuration should be required to get the plugin
 working & the keyboard shortcuts (see |reedline-mappings|) should be usable
-pretty much immediately in command-line mode.
+pretty much immediately in command-line mode. any built-in options which users
+can set in their .vimrc file or similar will be described below (currently
+there is just one such option, |g:space_delimited_C_w|).
+
+                                                        *g:space_delimited_C_w*
+
+by default, <c-w> will operate on words delineated by any non-alphanumeric
+characters, identically to <m-bs>. this is in line with the default behavior of
+the vim cmdline when this extension is not installed, but it differs from how
+that shortcut works in bash, where it operates on space-delineated words (and
+therefore serves a slightly different purpose than <m-bs>).
+
+you can configure <c-w> to operate on space-delimited words, as in bash, by
+setting the variable |g:space_delimited_C_w| to a nonzero value.
+
 
 =============================================================================
 MAPPINGS                                                    *reedline-mappings*
@@ -51,7 +65,7 @@ deletion                                                    *reedline-deletion*
                                                        *reedline_alt-backspace*
 <m-bs>                         rubout word
                                                  *reedline_c-w* *reedline_ctrl-w*
-<c-w>                          rubout space-delimited word
+<c-w>                          rubout word - see |g:space_delimited_C_w|
                                                  *reedline_c-d* *reedline_ctrl-d*
 <c-d>                          delete character
 

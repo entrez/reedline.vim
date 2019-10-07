@@ -19,7 +19,7 @@ some little bash/readline style cmdline shortcuts for vim.
 | <kbd>alt</kbd>-<kbd>f</kbd> | move one word right |
 | <kbd>alt</kbd>-<kbd>d</kbd> | delete word after cursor |
 | <kbd>alt</kbd>-<kbd>bkspace</kbd> | rubout word |
-| <kbd>ctrl</kbd>-<kbd>w</kbd> | rubout space-delimited word |
+| <kbd>ctrl</kbd>-<kbd>w</kbd> | rubout word [or space-delimited word, optionally] |
 | <kbd>ctrl</kbd>-<kbd>u</kbd> | delete everything from cursor to start of line |
 | <kbd>ctrl</kbd>-<kbd>d</kbd> | delete character |
 | <kbd>alt</kbd>-<kbd>=</kbd>, <kbd>alt</kbd>-<kbd>?</kbd> | display command completion options |
@@ -29,3 +29,11 @@ some little bash/readline style cmdline shortcuts for vim.
 | <kbd>ctrl</kbd>-<kbd>y</kbd> | "yank" (put/paste) most recently deleted word |
 | <kbd>ctrl</kbd>-<kbd>t</kbd> | transpose characters |
 | <kbd>alt</kbd>-<kbd>t</kbd> | transpose words |
+
+### configuration
+
+once installed, the variable `g:space_delimited_C_w` may be set to a nonzero
+value to force <kbd>ctrl</kbd>-<kbd>w</kbd> to behave like it normally does in
+bash (i.e. rubout the word up to the previous space). otherwise it will act
+identically to <kbd>alt</kbd>-<kbd>bkspace</kbd> - as it does by default in zsh,
+for instance.
