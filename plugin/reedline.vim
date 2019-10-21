@@ -1,3 +1,18 @@
+if exists('*s:reedline')
+    finish
+endif
+
+" s:shortcutmeta {{{
+func! s:shortcutmeta(key)
+    if has('nvim') || has('gui')
+        let result = '<M-' . substitute(a:key, '\v(^\<|\>$)', '', 'g') . '>'
+    else
+        let result = '<Esc>' . a:key
+    endif
+    return result
+endfunc
+" }}}
+
 " C-a jumps to start of line
 cno <c-a> <c-\>e<sid>reedline(-1, -1, 0, 0)<cr>
 " C-e jumps to end of line
@@ -9,15 +24,15 @@ cno <c-p> <up>
 cno <c-n> <down>
 " C-b moves 1 char left, M-b moves 1 word left
 cno <c-b> <left>
-cno <m-b> <c-\>e<sid>reedline(-1, 0, 0, 0)<cr>
+exec 'cno ' . <sid>shortcutmeta('b') . ' <c-\>e<sid>reedline(-1, 0, 0, 0)<cr>'
 " C-f moves 1 char right, M-f moves 1 word right
 cno <c-f> <right>
-cno <m-f> <c-\>e<sid>reedline(1, 0, 0, 0)<cr>
+exec 'cno ' . <sid>shortcutmeta('f') . ' <c-\>e<sid>reedline(1, 0, 0, 0)<cr>'
 " M-d and M-D delete from cursor to end of word
-cno <m-s-d> <c-\>e<sid>reedline(1, 0, 1, 0)<cr>
-cno <m-d> <c-\>e<sid>reedline(1, 0, 1, 0)<cr>
+exec 'cno ' . <sid>shortcutmeta('<s-d>') . ' <c-\>e<sid>reedline(1, 0, 1, 0)<cr>'
+exec 'cno ' . <sid>shortcutmeta('d') . ' <c-\>e<sid>reedline(1, 0, 1, 0)<cr>'
 " M-<BS> deletes word until reaching punctuaction character
-cno <m-bs> <c-\>e<sid>reedline(-1, 0, 1, 0)<cr>
+exec 'cno ' . <sid>shortcutmeta('<bs>') . ' <c-\>e<sid>reedline(-1, 0, 1, 0)<cr>'
 " C-w deletes space-delimited word if g:space_delimited_C_w == 1 
 " otherwise, acts like ALT-<BS>
 cno <c-w> <c-\>e<sid>reedline(-1, 1, 1, 0)<cr>
@@ -26,24 +41,20 @@ cno <c-u> <c-\>e<sid>reedline(-1, -1, 1, 0)<cr>
 " C-d deletes character to the right
 cno <c-d> <delete>
 " M-= and M-? activate command completion
-cno <m-=> <c-i>
-cno <m-?> <c-i>
+exec 'cno ' . <sid>shortcutmeta('=') . ' <c-i>'
+exec 'cno ' . <sid>shortcutmeta('?') . ' <c-i>'
 " M-l makes next word lowercase
-cno <m-l> <c-\>e<sid>reedline(1, 0, 0, -1)<cr>
+exec 'cno ' . <sid>shortcutmeta('l') . ' <c-\>e<sid>reedline(1, 0, 0, -1)<cr>'
 " M-u makes next word UPPERCASE
-cno <m-u> <c-\>e<sid>reedline(1, 0, 0, 1)<cr>
+exec 'cno ' . <sid>shortcutmeta('u') . ' <c-\>e<sid>reedline(1, 0, 0, 1)<cr>'
 " M-c makes next word Capitalized
-cno <m-c> <c-\>e<sid>reedline(1, 1, 0, 1)<cr>
+exec 'cno ' . <sid>shortcutmeta('c') . ' <c-\>e<sid>reedline(1, 1, 0, 1)<cr>'
 " C-y `yanks' (puts/pastes) last deleted word
 cno <c-y> <c-\>e<sid>reedline(1, 0, 0, 2)<cr>
 " C-t transposes characters
 cno <c-t> <c-\>e<sid>reedline(1, 1, 0, 3)<cr>
 " M-t transposes words
-cno <m-t> <c-\>e<sid>reedline(1, 0, 0, 3)<cr>
-
-if exists('*s:reedline')
-    finish
-endif
+exec 'cno ' . <sid>shortcutmeta('t') . ' <c-\>e<sid>reedline(1, 0, 0, 3)<cr>'
 
 " s:reedline {{{
 func! s:reedline(direction, special, delete, mode)
