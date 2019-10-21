@@ -143,3 +143,5 @@ func! s:reedline(direction, special, delete, mode)
     return cmd_edited
 endfunc
 " }}}
+
+" vim:fdm=marker:sw=4:ts=4:et
