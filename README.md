@@ -1,39 +1,39 @@
 ## reedline.vim
 
-### overview
+### Overview
 
-some little bash/readline style cmdline shortcuts for vim.
+Some little bash/readline style cmdline shortcuts for vim.
 
-### mappings
+### Mappings
 
-| shortcut | description |
+| Shortcut | Description |
 | :---: | :--- |
-| <kbd>ctrl</kbd>-<kbd>a</kbd> | jump to start of line |
-| <kbd>ctrl</kbd>-<kbd>e</kbd> | jump to end of line |
-| <kbd>ctrl</kbd>-<kbd>k</kbd> | delete everything from cursor to end of line |
-| <kbd>ctrl</kbd>-<kbd>p</kbd> | cycle up through command history |
-| <kbd>ctrl</kbd>-<kbd>n</kbd> | cycle down through command history |
-| <kbd>ctrl</kbd>-<kbd>b</kbd> | move one character left |
-| <kbd>ctrl</kbd>-<kbd>f</kbd> | move one character right |
-| <kbd>alt</kbd>-<kbd>b</kbd> | move one word left |
-| <kbd>alt</kbd>-<kbd>f</kbd> | move one word right |
-| <kbd>alt</kbd>-<kbd>d</kbd> | delete word after cursor |
-| <kbd>alt</kbd>-<kbd>bkspace</kbd> | rubout word |
-| <kbd>ctrl</kbd>-<kbd>w</kbd> | rubout word [or space-delimited word, optionally] |
-| <kbd>ctrl</kbd>-<kbd>u</kbd> | delete everything from cursor to start of line |
-| <kbd>ctrl</kbd>-<kbd>d</kbd> | delete character |
-| <kbd>alt</kbd>-<kbd>=</kbd>, <kbd>alt</kbd>-<kbd>?</kbd> | display command completion options |
-| <kbd>alt</kbd>-<kbd>l</kbd> | make next word lowercase |
-| <kbd>alt</kbd>-<kbd>u</kbd> | make next word UPPERCASE |
-| <kbd>alt</kbd>-<kbd>c</kbd> | make next word Capitalized |
-| <kbd>ctrl</kbd>-<kbd>y</kbd> | "yank" (put/paste) most recently deleted word |
-| <kbd>ctrl</kbd>-<kbd>t</kbd> | transpose characters |
-| <kbd>alt</kbd>-<kbd>t</kbd> | transpose words |
+| <kbd>Ctrl</kbd>-<kbd>a</kbd> | Jump to start of line |
+| <kbd>Ctrl</kbd>-<kbd>e</kbd> | Jump to end of line |
+| <kbd>Ctrl</kbd>-<kbd>k</kbd> | Delete everything from cursor to end of line |
+| <kbd>Ctrl</kbd>-<kbd>p</kbd> | Cycle up through command history |
+| <kbd>Ctrl</kbd>-<kbd>n</kbd> | Cycle down through command history |
+| <kbd>Ctrl</kbd>-<kbd>b</kbd> | Move one character left |
+| <kbd>Ctrl</kbd>-<kbd>f</kbd> | Move one character right |
+| <kbd>Alt</kbd>-<kbd>b</kbd> | Move one word left |
+| <kbd>Alt</kbd>-<kbd>f</kbd> | Move one word right |
+| <kbd>Alt</kbd>-<kbd>d</kbd> | Delete word after cursor |
+| <kbd>Alt</kbd>-<kbd>BkSpace</kbd> | Rubout word |
+| <kbd>Ctrl</kbd>-<kbd>w</kbd> | Rubout word [or space-delimited word, optionally] |
+| <kbd>Ctrl</kbd>-<kbd>u</kbd> | Delete everything from cursor to start of line |
+| <kbd>Ctrl</kbd>-<kbd>d</kbd> | Delete character |
+| <kbd>Alt</kbd>-<kbd>=</kbd>, <kbd>Alt</kbd>-<kbd>?</kbd> | Display command completion options |
+| <kbd>Alt</kbd>-<kbd>l</kbd> | Make next word lowercase |
+| <kbd>Alt</kbd>-<kbd>u</kbd> | Make next word UPPERCASE |
+| <kbd>Alt</kbd>-<kbd>c</kbd> | Make next word Capitalized |
+| <kbd>Ctrl</kbd>-<kbd>y</kbd> | "Yank" (put/paste) most recently deleted word |
+| <kbd>Ctrl</kbd>-<kbd>t</kbd> | Transpose characters |
+| <kbd>Alt</kbd>-<kbd>t</kbd> | Transpose words |
 
-### configuration
+### Configuration
 
-once installed, the variable `g:space_delimited_C_w` may be set to a nonzero
-value to force <kbd>ctrl</kbd>-<kbd>w</kbd> to behave like it normally does in
-bash (i.e. rubout the word up to the previous space). otherwise it will act
-identically to <kbd>alt</kbd>-<kbd>bkspace</kbd> - as it does by default in zsh,
+Once installed, the variable `g:space_delimited_C_w` may be set to a nonzero
+value to force <kbd>Ctrl</kbd>-<kbd>w</kbd> to behave like it normally does in
+bash (i.e. rubout the word up to the previous space). Otherwise it will act
+identically to <kbd>Alt</kbd>-<kbd>BkSpace</kbd> - as it does by default in zsh,
 for instance.

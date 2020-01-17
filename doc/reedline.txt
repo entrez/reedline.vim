@@ -1,93 +1,93 @@
 *reedline.txt* readline-style command line shortcuts
-author: entrez <me@entrez.cc>
-license: mit
+Author: Michael Meyer <me@entrez.cc>
+License: MIT
 
 =============================================================================
 CONTENTS                              *reedline* *reedline.vim* *reedline-contents*
 
-    1. usage ........................ |reedline-usage|
-    2. mappings ..................... |reedline-mappings|
+    1. Usage ........................ |reedline-usage|
+    2. Mappings ..................... |reedline-mappings|
 
 =============================================================================
 USAGE                                                          *reedline-usage*
 
-after installing the plugin with your preferred plugin manager (or manually),
-little to no additional configuration should be required to get the plugin
-working & the keyboard shortcuts (see |reedline-mappings|) should be usable
-pretty much immediately in command-line mode. any built-in options which users
-can set in their .vimrc file or similar will be described below (currently
-there is just one such option, |g:space_delimited_C_w|).
+After installing the plugin with your preferred plugin manager (or manually),
+little to no additional configuration should be required to get it working &
+the keyboard shortcuts (see |reedline-mappings|) should be usable pretty much
+immediately in command-line mode. Any built-in options which users can set in
+their .vimrc file or similar will be described below (currently there is just
+one such option, |g:space_delimited_C_w|).
 
                                                         *g:space_delimited_C_w*
 
-by default, <c-w> will operate on words delineated by any non-alphanumeric
-characters, identically to <m-bs>. this is in line with the default behavior of
+By default, <C-w> will operate on words delineated by any non-alphanumeric
+characters, identically to <M-BS>. This is in line with the default behavior of
 the vim cmdline when this extension is not installed, but it differs from how
 that shortcut works in bash, where it operates on space-delineated words (and
-therefore serves a slightly different purpose than <m-bs>).
+therefore serves a slightly different purpose than <M-BS>).
 
-you can configure <c-w> to operate on space-delimited words, as in bash, by
+You can configure <C-w> to operate on space-delimited words, as in bash, by
 setting the variable |g:space_delimited_C_w| to a nonzero value.
 
 
 =============================================================================
 MAPPINGS                                                    *reedline-mappings*
 
-default mappings are listed below, categorized under |reedline-movement|,
+Default mappings are listed below, categorized under |reedline-movement|,
 |reedline-deletion|, or |reedline-other|.
 
 -----------------------------------------------------------------------------
 movement                                                    *reedline-movement*
 
                                                  *reedline_c-a* *reedline_ctrl-a*
-<c-a>                          jump to the start of the current command/line
+<C-a>                          Jump to the start of the current command/line
                                                  *reedline_c-e* *reedline_ctrl-e*
-<c-e>                          jump to the end of the current command/line
+<C-e>                          Jump to the end of the current command/line
                                                  *reedline_c-b* *reedline_ctrl-b*
-<c-b>                          move one character left
+<C-b>                          Move one character left
                                                  *reedline_c-f* *reedline_ctrl-f*
-<c-f>                          move one character right
+<C-f>                          Move one character right
                                                   *reedline_m-b* *reedline_alt-b*
-<m-b>                          move one word left
+<M-b>                          Move one word left
                                                   *reedline_m-f* *reedline_alt-f*
-<m-f>                          move one word right
+<M-f>                          Move one word right
 
 -----------------------------------------------------------------------------
 deletion                                                    *reedline-deletion*
 
                                                  *reedline_c-k* *reedline_ctrl-k*
-<c-k>                          delete everything until end of line
+<C-k>                          Delete everything until end of line
                                                  *reedline_c-u* *reedline_ctrl-u*
-<c-u>                          delete until start of line
+<C-u>                          Delete until start of line
                                                   *reedline_m-d* *reedline_alt-d*
-<m-d>                          delete word
+<M-d>                          Delete word
                                                                 *reedline_m-bs*
                                                        *reedline_alt-backspace*
-<m-bs>                         rubout word
+<M-BS>                         Rubout word
                                                  *reedline_c-w* *reedline_ctrl-w*
-<c-w>                          rubout word - see |g:space_delimited_C_w|
+<C-w>                          Rubout word - see |g:space_delimited_C_w|
                                                  *reedline_c-d* *reedline_ctrl-d*
-<c-d>                          delete character
+<C-d>                          Delete character
 
 -----------------------------------------------------------------------------
 other                                                          *reedline-other*
 
                                                   *reedline_m-l* *reedline_alt-l*
-<m-l>                          make next word lowercase
+<M-l>                          Make next word lowercase
                                                   *reedline_m-u* *reedline_alt-u*
-<m-u>                          make next word UPPERCASE
+<M-u>                          Make next word UPPERCASE
                                                   *reedline_m-c* *reedline_alt-c*
-<m-c>                          make next word Capitalized
+<M-c>                          Make next word Capitalized
                                                  *reedline_c-y* *reedline_ctrl-y*
-<c-y>                          `yank' (put/paste) last deleted word
+<C-y>                          `Yank' (put/paste) last deleted word
                                                  *reedline_c-t* *reedline_ctrl-t*
-<c-t>                          transpose characters
+<C-t>                          Transpose characters
                                                   *reedline_m-t* *reedline_alt-t*
-<m-t>                          transpose words
+<M-t>                          Transpose words
                                                  *reedline_c-p* *reedline_ctrl-p*
-<c-p>                          cycle up through cmd history
+<C-p>                          Cycle up through cmd history
                                                  *reedline_c-n* *reedline_ctrl-n*
-<c-n>                          cycle down through cmd history
+<C-n>                          Cycle down through cmd history
                                                     *reedline_m-=* *reedline_m-?*
                                                 *reedline_alt-=* *reedline_alt-?*
-<m-=> <m-?>                    open command completion options/suggestions
+<M-=> <M-?>                    Open command completion options/suggestions
