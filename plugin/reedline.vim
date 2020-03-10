@@ -33,7 +33,7 @@ exec 'cno ' . <SID>shortcutmeta('<s-d>') . ' <C-\>e<SID>reedline(1, 0, 1, 0)<CR>
 exec 'cno ' . <SID>shortcutmeta('d') . ' <C-\>e<SID>reedline(1, 0, 1, 0)<CR>'
 " M-<BS> deletes word until reaching punctuaction character
 exec 'cno ' . <SID>shortcutmeta('<bs>') . ' <C-\>e<SID>reedline(-1, 0, 1, 0)<CR>'
-" C-w deletes space-delimited word if g:space_delimited_C_w == 1 
+" C-w deletes space-delimited word if g:reedline_space_delimited_C_w == 1 
 " otherwise, acts like ALT-<BS>
 cno <C-w> <C-\>e<SID>reedline(-1, 1, 1, 0)<CR>
 " C-u deletes to start of line
@@ -74,9 +74,9 @@ func! s:reedline(direction, special, delete, mode)
         let second_half = cmd[pos:]
     endif
     if a:direction < 0
-        let first_half_edited = a:special>0 && exists("g:space_delimited_C_w") && g:space_delimited_C_w 
-                    \ ?substitute(first_half, '\v\S*\s*$', '', ''):a:special<0?''
-                    \ :substitute(first_half, '\v[0-9A-Za-z]*[^0-9A-Za-z]*$', '', '')
+        let first_half_edited = a:special>0 && exists("g:reedline_space_delimited_C_w") 
+                    \ && g:reedline_space_delimited_C_w ? substitute(first_half, '\v\S*\s*$', '', '')
+                    \ :a:special<0?'':substitute(first_half, '\v[0-9A-Za-z]*[^0-9A-Za-z]*$', '', '')
         let lendiff = len(first_half) - len(first_half_edited)
         let yanker = first_half[-lendiff:]
         let cmd_edited = a:delete?first_half_edited . second_half:cmd

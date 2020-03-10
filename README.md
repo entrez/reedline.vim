@@ -32,12 +32,12 @@ Some little bash/readline style cmdline shortcuts for vim.
 
 ### Configuration
 
-#### `g:space_delimited_C_w`
+#### `g:reedline_space_delimited_C_w`
 
-Once installed, the variable `g:space_delimited_C_w` may be set to a nonzero
-value to force <kbd>Ctrl</kbd>-<kbd>w</kbd> to behave like it normally does in
-bash (i.e. rubout the word up to the previous space). Otherwise it will act
-identically to <kbd>Alt</kbd>-<kbd>BkSpace</kbd> - as it does by default in
+Once installed, the variable `g:reedline_space_delimited_C_w` may be set to a
+nonzero value to force <kbd>Ctrl</kbd>-<kbd>w</kbd> to behave like it normally
+does in bash (i.e. rubout the word up to the previous space). Otherwise it will
+act identically to <kbd>Alt</kbd>-<kbd>BkSpace</kbd> - as it does by default in
 zsh, for instance.
 
 #### `g:reedline_max_yank_time`
