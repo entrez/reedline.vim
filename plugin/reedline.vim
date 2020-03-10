@@ -79,7 +79,14 @@ func! s:reedline(direction, special, delete, mode)
         let cmd_edited = a:delete?first_half_edited . second_half:cmd
         call setcmdpos(pos + 1 - lendiff)
         if a:delete && len(yanker) > 0
-            let s:cmdline_yanked = yanker
+            let tstamp = localtime()
+            if exists('s:cmdline_yanked') && type(s:cmdline_yanked) == 3 
+                        \ && tstamp - s:cmdline_yanked[0] < 1
+                let s:cmdline_yanked = [tstamp,
+                                      \ yanker . s:cmdline_yanked[1]]
+            else 
+                let s:cmdline_yanked = [tstamp, yanker]
+            endif
         endif
     else
         let second_half_edited = a:special && !a:mode ? a:special<0?'':second_half[1:]
@@ -95,7 +102,7 @@ func! s:reedline(direction, special, delete, mode)
             endif
             let cmd_edited = first_half.changedcase.second_half_edited
         elseif a:mode == 2
-            let putter = exists('s:cmdline_yanked')?s:cmdline_yanked:''
+            let putter = exists('s:cmdline_yanked')?s:cmdline_yanked[1]:''
             let cmd_edited = first_half . putter . second_half
         elseif a:mode == 3
             if a:special
@@ -137,7 +144,14 @@ func! s:reedline(direction, special, delete, mode)
                 call setcmdpos(pos + 1 + lendiff)
             endif
         elseif len(yanker) > 0
-            let s:cmdline_yanked = yanker
+            let tstamp = localtime()
+            if exists('s:cmdline_yanked') && type(s:cmdline_yanked) == 3 
+                        \ && tstamp - s:cmdline_yanked[0] < 1
+                let s:cmdline_yanked = [tstamp,
+                                      \ s:cmdline_yanked[1] . yanker]
+            else 
+                let s:cmdline_yanked = [tstamp, yanker]
+            endif
         endif
     endif
     return cmd_edited
