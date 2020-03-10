@@ -14,50 +14,53 @@ endfunc
 " }}}
 
 " C-a jumps to start of line
-cno <c-a> <c-\>e<sid>reedline(-1, -1, 0, 0)<cr>
+cno <C-a> <C-\>e<SID>reedline(-1, -1, 0, 0)<CR>
 " C-e jumps to end of line
-cno <c-e> <c-\>e<sid>reedline(1, -1, 0, 0)<cr>
+cno <C-e> <C-\>e<SID>reedline(1, -1, 0, 0)<CR>
 " C-k deletes everything from cursor to end of line
-cno <c-k> <c-\>e<sid>reedline(1, -1, 1, 0)<cr>
+cno <C-k> <C-\>e<SID>reedline(1, -1, 1, 0)<CR>
 " C-p and C-n cycle up & down through cmd history
-cno <c-p> <up>
-cno <c-n> <down>
+cno <C-p> <up>
+cno <C-n> <down>
 " C-b moves 1 char left, M-b moves 1 word left
-cno <c-b> <left>
-exec 'cno ' . <sid>shortcutmeta('b') . ' <c-\>e<sid>reedline(-1, 0, 0, 0)<cr>'
+cno <C-b> <left>
+exec 'cno ' . <SID>shortcutmeta('b') . ' <C-\>e<SID>reedline(-1, 0, 0, 0)<CR>'
 " C-f moves 1 char right, M-f moves 1 word right
-cno <c-f> <right>
-exec 'cno ' . <sid>shortcutmeta('f') . ' <c-\>e<sid>reedline(1, 0, 0, 0)<cr>'
+cno <C-f> <right>
+exec 'cno ' . <SID>shortcutmeta('f') . ' <C-\>e<SID>reedline(1, 0, 0, 0)<CR>'
 " M-d and M-D delete from cursor to end of word
-exec 'cno ' . <sid>shortcutmeta('<s-d>') . ' <c-\>e<sid>reedline(1, 0, 1, 0)<cr>'
-exec 'cno ' . <sid>shortcutmeta('d') . ' <c-\>e<sid>reedline(1, 0, 1, 0)<cr>'
+exec 'cno ' . <SID>shortcutmeta('<s-d>') . ' <C-\>e<SID>reedline(1, 0, 1, 0)<CR>'
+exec 'cno ' . <SID>shortcutmeta('d') . ' <C-\>e<SID>reedline(1, 0, 1, 0)<CR>'
 " M-<BS> deletes word until reaching punctuaction character
-exec 'cno ' . <sid>shortcutmeta('<bs>') . ' <c-\>e<sid>reedline(-1, 0, 1, 0)<cr>'
-" C-w deletes space-delimited word if g:space_delimited_C_w == 1 
+exec 'cno ' . <SID>shortcutmeta('<bs>') . ' <C-\>e<SID>reedline(-1, 0, 1, 0)<CR>'
+" C-w deletes space-delimited word if g:reedline_space_delimited_C_w == 1 
 " otherwise, acts like ALT-<BS>
-cno <c-w> <c-\>e<sid>reedline(-1, 1, 1, 0)<cr>
+cno <C-w> <C-\>e<SID>reedline(-1, 1, 1, 0)<CR>
 " C-u deletes to start of line
-cno <c-u> <c-\>e<sid>reedline(-1, -1, 1, 0)<cr>
+cno <C-u> <C-\>e<SID>reedline(-1, -1, 1, 0)<CR>
 " C-d deletes character to the right
 cno <C-d> <C-\>e<SID>reedline(1, 1, 1, 0)<CR>
 " M-= and M-? activate command completion
-exec 'cno ' . <sid>shortcutmeta('=') . ' <c-i>'
-exec 'cno ' . <sid>shortcutmeta('?') . ' <c-i>'
+exec 'cno ' . <SID>shortcutmeta('=') . ' <C-i>'
+exec 'cno ' . <SID>shortcutmeta('?') . ' <C-i>'
 " M-l makes next word lowercase
-exec 'cno ' . <sid>shortcutmeta('l') . ' <c-\>e<sid>reedline(1, 0, 0, -1)<cr>'
+exec 'cno ' . <SID>shortcutmeta('l') . ' <C-\>e<SID>reedline(1, 0, 0, -1)<CR>'
 " M-u makes next word UPPERCASE
-exec 'cno ' . <sid>shortcutmeta('u') . ' <c-\>e<sid>reedline(1, 0, 0, 1)<cr>'
+exec 'cno ' . <SID>shortcutmeta('u') . ' <C-\>e<SID>reedline(1, 0, 0, 1)<CR>'
 " M-c makes next word Capitalized
-exec 'cno ' . <sid>shortcutmeta('c') . ' <c-\>e<sid>reedline(1, 1, 0, 1)<cr>'
+exec 'cno ' . <SID>shortcutmeta('c') . ' <C-\>e<SID>reedline(1, 1, 0, 1)<CR>'
 " C-y `yanks' (puts/pastes) last deleted word
-cno <c-y> <c-\>e<sid>reedline(1, 0, 0, 2)<cr>
+cno <C-y> <C-\>e<SID>reedline(1, 0, 0, 2)<CR>
 " C-t transposes characters
-cno <c-t> <c-\>e<sid>reedline(1, 1, 0, 3)<cr>
+cno <C-t> <C-\>e<SID>reedline(1, 1, 0, 3)<CR>
 " M-t transposes words
-exec 'cno ' . <sid>shortcutmeta('t') . ' <c-\>e<sid>reedline(1, 0, 0, 3)<cr>'
+exec 'cno ' . <SID>shortcutmeta('t') . ' <C-\>e<SID>reedline(1, 0, 0, 3)<CR>'
 
 " s:reedline {{{
 func! s:reedline(direction, special, delete, mode)
+    let max_yank_time = exists('g:reedline_max_yank_time') 
+                \ && count([v:t_number, v:t_float], type(g:reedline_max_yank_time)) > 0
+                \ ? g:reedline_max_yank_time : 1
     let pos = getcmdpos() - 1
     let cmd = getcmdline()
     if pos == 0
@@ -71,15 +74,22 @@ func! s:reedline(direction, special, delete, mode)
         let second_half = cmd[pos:]
     endif
     if a:direction < 0
-        let first_half_edited = a:special>0 && exists("g:space_delimited_C_w") && g:space_delimited_C_w 
-                    \ ?substitute(first_half, '\v\S*\s*$', '', ''):a:special<0?''
-                    \ :substitute(first_half, '\v[0-9A-Za-z]*[^0-9A-Za-z]*$', '', '')
+        let first_half_edited = a:special>0 && exists("g:reedline_space_delimited_C_w") 
+                    \ && g:reedline_space_delimited_C_w ? substitute(first_half, '\v\S*\s*$', '', '')
+                    \ :a:special<0?'':substitute(first_half, '\v[0-9A-Za-z]*[^0-9A-Za-z]*$', '', '')
         let lendiff = len(first_half) - len(first_half_edited)
         let yanker = first_half[-lendiff:]
         let cmd_edited = a:delete?first_half_edited . second_half:cmd
         call setcmdpos(pos + 1 - lendiff)
         if a:delete && len(yanker) > 0
-            let s:cmdline_yanked = yanker
+            let tstamp = localtime()
+            if exists('s:cmdline_yanked') && type(s:cmdline_yanked) == 3 
+                        \ && tstamp - s:cmdline_yanked[0] < max_yank_time
+                let s:cmdline_yanked = [tstamp,
+                                      \ yanker . s:cmdline_yanked[1]]
+            else 
+                let s:cmdline_yanked = [tstamp, yanker]
+            endif
         endif
     else
         let second_half_edited = a:special && !a:mode ? a:special<0?'':second_half[1:]
@@ -95,7 +105,7 @@ func! s:reedline(direction, special, delete, mode)
             endif
             let cmd_edited = first_half.changedcase.second_half_edited
         elseif a:mode == 2
-            let putter = exists('s:cmdline_yanked')?s:cmdline_yanked:''
+            let putter = exists('s:cmdline_yanked')?s:cmdline_yanked[1]:''
             let cmd_edited = first_half . putter . second_half
         elseif a:mode == 3
             if a:special
@@ -137,7 +147,14 @@ func! s:reedline(direction, special, delete, mode)
                 call setcmdpos(pos + 1 + lendiff)
             endif
         elseif len(yanker) > 0
-            let s:cmdline_yanked = yanker
+            let tstamp = localtime()
+            if exists('s:cmdline_yanked') && type(s:cmdline_yanked) == 3 
+                        \ && tstamp - s:cmdline_yanked[0] < max_yank_time
+                let s:cmdline_yanked = [tstamp,
+                                      \ s:cmdline_yanked[1] . yanker]
+            else 
+                let s:cmdline_yanked = [tstamp, yanker]
+            endif
         endif
     endif
     return cmd_edited

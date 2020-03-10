@@ -16,18 +16,30 @@ little to no additional configuration should be required to get it working &
 the keyboard shortcuts (see |reedline-mappings|) should be usable pretty much
 immediately in command-line mode. Any built-in options which users can set in
 their .vimrc file or similar will be described below (currently there is just
-one such option, |g:space_delimited_C_w|).
+one such option, |g:reedline_space_delimited_C_w|).
 
-                                                        *g:space_delimited_C_w*
+                                               *g:reedline_space_delimited_C_w*
 
 By default, <C-w> will operate on words delineated by any non-alphanumeric
-characters, identically to <M-BS>. This is in line with the default behavior of
-the vim cmdline when this extension is not installed, but it differs from how
-that shortcut works in bash, where it operates on space-delineated words (and
-therefore serves a slightly different purpose than <M-BS>).
+characters, identically to <M-BS>. This is in line with the default behavior
+of the vim cmdline when this extension is not installed, but it differs from
+how that shortcut works in bash, where it operates on space-delineated words
+(and therefore serves a slightly different purpose than <M-BS>).
 
 You can configure <C-w> to operate on space-delimited words, as in bash, by
-setting the variable |g:space_delimited_C_w| to a nonzero value.
+setting the variable |g:reedline_space_delimited_C_w| to a nonzero value.
+
+                                                     *g:reedline_yank_max_time*
+
+You can set |g:reedline_max_yank_time| to decide how many seconds can pass
+between two delete operations before they are considered separate operations
+for purposes of the yank feature (<C-y>). If two operations happen more
+quickly than that, the deleted text will be combined when yanked as if it was
+erased in a single operation. By default, this value is 1 second.
+
+Setting |g:reedline_max_yank_time| to 0 will return to the previous behavior
+where no operations are combined & the yank register never contains more than
+the latest discrete deletion.
 
 
 =============================================================================
@@ -65,7 +77,7 @@ deletion                                                    *reedline-deletion*
                                                        *reedline_alt-backspace*
 <M-BS>                         Rubout word
                                                  *reedline_c-w* *reedline_ctrl-w*
-<C-w>                          Rubout word - see |g:space_delimited_C_w|
+<C-w>                          Rubout word (|g:reedline_space_delimited_C_w|)
                                                  *reedline_c-d* *reedline_ctrl-d*
 <C-d>                          Delete character
 

@@ -32,8 +32,23 @@ Some little bash/readline style cmdline shortcuts for vim.
 
 ### Configuration
 
-Once installed, the variable `g:space_delimited_C_w` may be set to a nonzero
-value to force <kbd>Ctrl</kbd>-<kbd>w</kbd> to behave like it normally does in
-bash (i.e. rubout the word up to the previous space). Otherwise it will act
-identically to <kbd>Alt</kbd>-<kbd>BkSpace</kbd> - as it does by default in zsh,
-for instance.
+#### `g:reedline_space_delimited_C_w`
+
+Once installed, the variable `g:reedline_space_delimited_C_w` may be set to a
+nonzero value to force <kbd>Ctrl</kbd>-<kbd>w</kbd> to behave like it normally
+does in bash (i.e. rubout the word up to the previous space). Otherwise it will
+act identically to <kbd>Alt</kbd>-<kbd>BkSpace</kbd> - as it does by default in
+zsh, for instance.
+
+#### `g:reedline_max_yank_time`
+
+You can set `g:reedline_max_yank_time` to decide how many seconds can pass
+between two delete operations before they are considered separate operations
+for purposes of the yank feature (<kbd>Ctrl</kbd>-<kbd>y</kbd>). If two
+operations happen more quickly than that, the deleted text will be combined
+when yanked as if it was erased in a single operation. By default, this value
+is 1 second.
+
+Setting `g:reedline_max_yank_time` to 0 will return to the previous behavior
+where no operations are combined & the yank register never contains more than
+the latest discrete deletion.
