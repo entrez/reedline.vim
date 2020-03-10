@@ -29,6 +29,18 @@ therefore serves a slightly different purpose than <M-BS>).
 You can configure <C-w> to operate on space-delimited words, as in bash, by
 setting the variable |g:space_delimited_C_w| to a nonzero value.
 
+                                                     *g:reedline_yank_max_time*
+
+You can set `g:reedline_max_yank_time` to decide how many seconds can pass
+between two delete operations before they are considered separate operations
+for purposes of the yank feature (<C-y>). If two operations happen more
+quickly than that, the deleted text will be combined when yanked as if it was
+erased in a single operation. By default, this value is 1 second.
+
+Setting `g:reedline_max_yank_time` to 0 will return to the previous behavior
+where no operations are combined & the yank register never contains more than
+the latest discrete deletion.
+
 
 =============================================================================
 MAPPINGS                                                    *reedline-mappings*
