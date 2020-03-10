@@ -39,7 +39,7 @@ cno <c-w> <c-\>e<sid>reedline(-1, 1, 1, 0)<cr>
 " C-u deletes to start of line
 cno <c-u> <c-\>e<sid>reedline(-1, -1, 1, 0)<cr>
 " C-d deletes character to the right
-cno <c-d> <delete>
+cno <C-d> <C-\>e<SID>reedline(1, 1, 1, 0)<CR>
 " M-= and M-? activate command completion
 exec 'cno ' . <sid>shortcutmeta('=') . ' <c-i>'
 exec 'cno ' . <sid>shortcutmeta('?') . ' <c-i>'
@@ -82,8 +82,8 @@ func! s:reedline(direction, special, delete, mode)
             let s:cmdline_yanked = yanker
         endif
     else
-        let second_half_edited = a:special&&!a:mode?''
-                    \ :substitute(second_half, '\v^[^0-9A-Za-z]*[0-9A-Za-z]*', '', '')
+        let second_half_edited = a:special && !a:mode ? a:special<0?'':second_half[1:]
+                   \ :substitute(second_half, '\v^[^0-9A-Za-z]*[0-9A-Za-z]*', '', '')
         let lendiff = len(second_half) - len(second_half_edited) 
         let yanker = second_half[:lendiff-1]
         if abs(a:mode) == 1
