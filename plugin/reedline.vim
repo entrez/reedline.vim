@@ -39,7 +39,7 @@ cno <c-w> <c-\>e<sid>reedline(-1, 1, 1, 0)<cr>
 " C-u deletes to start of line
 cno <c-u> <c-\>e<sid>reedline(-1, -1, 1, 0)<cr>
 " C-d deletes character to the right
-cno <c-d> <delete>
+cno <C-d> <C-\>e<SID>reedline(1, 1, 1, 0)<CR>
 " M-= and M-? activate command completion
 exec 'cno ' . <sid>shortcutmeta('=') . ' <c-i>'
 exec 'cno ' . <sid>shortcutmeta('?') . ' <c-i>'
