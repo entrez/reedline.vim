@@ -58,6 +58,9 @@ exec 'cno ' . <SID>shortcutmeta('t') . ' <C-\>e<SID>reedline(1, 0, 0, 3)<CR>'
 
 " s:reedline {{{
 func! s:reedline(direction, special, delete, mode)
+    let max_yank_time = exists('g:reedline_max_yank_time') 
+                \ && count([v:t_number, v:t_float], type(g:reedline_max_yank_time)) > 0
+                \ ? g:reedline_max_yank_time : 1
     let pos = getcmdpos() - 1
     let cmd = getcmdline()
     if pos == 0
@@ -81,7 +84,7 @@ func! s:reedline(direction, special, delete, mode)
         if a:delete && len(yanker) > 0
             let tstamp = localtime()
             if exists('s:cmdline_yanked') && type(s:cmdline_yanked) == 3 
-                        \ && tstamp - s:cmdline_yanked[0] < 1
+                        \ && tstamp - s:cmdline_yanked[0] < max_yank_time
                 let s:cmdline_yanked = [tstamp,
                                       \ yanker . s:cmdline_yanked[1]]
             else 
@@ -146,7 +149,7 @@ func! s:reedline(direction, special, delete, mode)
         elseif len(yanker) > 0
             let tstamp = localtime()
             if exists('s:cmdline_yanked') && type(s:cmdline_yanked) == 3 
-                        \ && tstamp - s:cmdline_yanked[0] < 1
+                        \ && tstamp - s:cmdline_yanked[0] < max_yank_time
                 let s:cmdline_yanked = [tstamp,
                                       \ s:cmdline_yanked[1] . yanker]
             else 
